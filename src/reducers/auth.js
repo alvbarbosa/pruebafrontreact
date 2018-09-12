@@ -1,5 +1,6 @@
 
 import { AUTH } from "../types";
+
 const initialState = {
   isAuthenticate: false,
   user: null

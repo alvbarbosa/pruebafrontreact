@@ -1,0 +1,18 @@
+.map {
+  height: 100vh;
+  width: 100%;
+}
+
+.fields-form {
+  padding: 40px;
+    margin: 10px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+    background-color: white;
+}
+
+.fields-form button {
+  margin-right: 5px;
+}

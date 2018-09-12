@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button'
 import './login-page.css'
 
 const LoginPage = props => {
-  const { error } = props
+  const { error, reset } = props
   return (
     <div className="container">
       <Card className="card">
@@ -27,7 +27,7 @@ const LoginPage = props => {
           <Button type="submit" variant="contained" size="small" color="primary">
             Iniciar Sesión
         </Button>
-          <Button type="reset" variant="outlined" size="small" color="primary">
+          <Button variant="outlined" size="small" color="primary" onClick={reset}>
             Cancelar
         </Button>
         </CardActions>

@@ -37,6 +37,8 @@
     "react": "^16.5.0",
     "react-dev-utils": "^5.0.2",
     "react-dom": "^16.5.0",
+    "react-geocode": "^0.1.2",
+    "react-google-maps": "^9.4.5",
     "react-redux": "^5.0.7",
     "react-redux-form": "^1.16.10",
     "react-router-dom": "^4.3.1",
@@ -99,5 +101,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "json-server": "^0.14.0"
+  }
 }

@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import LoginPageComponent from '../../views/login-page'
 import { connect } from "react-redux"
-import { Field, reduxForm, SubmissionError } from "redux-form"
+import { Field, reduxForm } from "redux-form"
 import TextField from '@material-ui/core/TextField'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import Lock from '@material-ui/icons/Lock'
 import FormControl from '@material-ui/core/FormControl'
+import { Redirect } from "react-router-dom";
+import { login } from "../actions";
 
 const required = value => (value ? undefined : "Obligatorio");
 const maxLength = max => value =>
@@ -24,7 +26,6 @@ const alphaNumeric = value =>
     ? "Solo caracteres alfanuméricos"
     : undefined;
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 class LoginPage extends Component {
   renderInput({ input, label, type, meta: { touched, error, warning } }) {
     return (
@@ -65,38 +66,30 @@ class LoginPage extends Component {
     </div>
   )
   handleLogin = values => {
-    return sleep(1000).then(() => {
-      // simulate server latency
-      if (!['john', 'paul', 'george', 'ringo'].includes(values.username)) {
-        throw new SubmissionError({
-          username: 'User does not exist',
-          _error: '¡Error de inicio de sesion!'
-        })
-      } else {
-        window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
-      }
-    })
+    return this.props.login()
   }
   render() {
-    console.log(this.props);
+    const { isAuthenticate } = this.props
     return (
-      <form onSubmit={this.props.handleSubmit(this.handleLogin)}>
-        <LoginPageComponent
-          {...this.props}
-          fields={this.fields}
-        />
-      </form>
+      isAuthenticate
+        ? <Redirect to="/data-entry" />
+        : <form onSubmit={this.props.handleSubmit(this.handleLogin)}>
+          <LoginPageComponent
+            {...this.props}
+            fields={this.fields}
+          />
+        </form>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-
+  isAuthenticate: state.authReducer.isAuthenticate
 })
 
-const mapDispatchToProps = {
-
-}
+const mapDispatchToProps = dispatch => ({
+  login: () => dispatch(login())
+})
 
 const LoginContainer = connect(mapStateToProps, mapDispatchToProps)(LoginPage)
 
