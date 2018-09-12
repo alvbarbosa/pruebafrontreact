@@ -62,7 +62,8 @@ const Entry = props => {
 }
 
 Entry.propTypes = {
-
+  fields: PropTypes.func.isRequired,
+  data: PropTypes.object
 }
 
 export default Entry
